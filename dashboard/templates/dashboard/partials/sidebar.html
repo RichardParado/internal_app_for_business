@@ -1,0 +1,15 @@
+{% load static %}
+<div class="d-flex justify-content-center">
+    <img src="{% static 'dashboard/images/logo.png' %}" class="d-lg-block d-none" alt="logo" width="50">
+</div>
+
+<ul class="nav flex-column py-2">
+    <li class="nav-item">
+        <a class="nav-link {% if request.path == '/' %}active text-white{% else %}text-secondary{% endif %}" {% if request.path == '/' %}aria-current="page"{% endif %} href="{% url 'dashboard' %}"><i class="bi bi-speedometer"></i> Dashboard</a>
+    </li>
+    {% if user.employee or user.is_superuser %}
+    <li class="nav-item">
+        <a class="nav-link {% if '/leaves/' in request.path %}active text-white{% else %}text-secondary{% endif %}" {% if '/leaves/' in request.path %}aria-current="page"{% endif %} href="{% url 'leave-list' %}"><i class="bi bi-tree"></i> Leave Tracker</a>
+    </li>
+    {% endif %}
+</ul>

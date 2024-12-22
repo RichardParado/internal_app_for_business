@@ -1,0 +1,31 @@
+{% extends 'account/base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+<div class="card py-5 text-center w-50 border-0 shadow">
+    <div class="card-body">
+      <h5 class="card-title">Welcome back</h5>
+      <p class="card-text">Login to continue.</p>
+    </div>
+    <div class="card-body">
+        <form action="{% url 'account_login' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.login }}
+                {{ form.login.errors }}
+            </div>
+            <div class="mb-3">
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+            <button class="btn btn-sm btn-dark w-100" type="submit">Login</button>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <p>Don't have an account? <a href="{% url 'account_signup' %}">Signup</a></p>
+        </div>
+    </div>
+  </div>
+{% endblock content %}

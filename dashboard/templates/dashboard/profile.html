@@ -1,0 +1,44 @@
+{% extends 'dashboard/partials/base.html' %}
+
+{% block title %}Profile{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row py-2 align-items-center">
+        <div class="col-6">
+            <h5>Profile</h5>
+
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-dark btn-sm"><a href="{% url 'dashboard' %}"
+                    class="text-white text-decoration-none">Home</a></button>
+        </div>
+
+    </div>
+    <div class="row py-2">
+        <div class="col">
+
+            <div class="card mb-2 shadow border-0">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button type="submit" class="btn btn-success w-100 btn-sm mt-3">Save</button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    {% if user.employee %}
+                    <p><strong>Leaves:</strong></p>
+                    {% for leave_type in leaves_remaining %}
+                    <p class="card-text">{{ leave_type.leave_type }}: <strong>{{ leave_type.remaining_days }}</strong>
+                    </p>
+                    {% endfor %}
+
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

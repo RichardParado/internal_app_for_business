@@ -1,0 +1,9 @@
+.dropdown-menu li {
+    position: relative;
+}
+
+/* ChatBot */
+#message-content {
+    max-height: calc(100vh - 182px);
+    overflow-y: auto;
+}

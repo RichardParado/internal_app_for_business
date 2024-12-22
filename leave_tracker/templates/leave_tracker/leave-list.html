@@ -1,0 +1,48 @@
+{% extends 'dashboard/partials/base.html' %}
+
+{% block title %}Leave List{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row py-2 align-items-center">
+        <div class="col-6">
+            <h5>Leaves</h5>
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-sm btn-dark"><a href="{% url 'apply-leave' %}"
+                    class="text-white text-decoration-none">Create Leave Request</a></button>
+        </div>
+
+    </div>
+    <div class="row py-2">
+        <div class="col">
+
+            <div class="card mb-2 shadow border-0">
+                <div class="card-body">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">Employee Name</th>
+                                <th scope="col">Leave Type</th>
+                                <th scope="col">Applied On</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for leave_application in leave_applications %}
+                            <tr>
+                                <td><a href="{% url 'leave-detail' leave_application.id %}" class="text-decoration-none text-black">{{ leave_application.employee.user.username }}</a></td>
+                                <td>{{ leave_application.leave_type }}</td>
+                                <td>{{ leave_application.applied_on }}</td>
+                                <td>{{ leave_application.status }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

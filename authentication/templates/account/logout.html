@@ -1,0 +1,24 @@
+{% extends 'account/base.html' %}
+
+{% block title %}Logout{% endblock title %}
+
+{% block content %}
+<div class="card py-5 text-center w-50 border-0 shadow">
+    <div class="card-body">
+      <h5 class="card-title">Logout</h5>
+      <p class="card-text">Are you sure you want to logout?</p>
+    </div>
+    <div class="card-body">
+        <form action="{% url 'account_logout' %}" method="post">
+            {% csrf_token %}
+
+            <button class="btn btn-sm btn-dark w-100" type="submit">Logout</button>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <p>Go back to <a href="{% url 'dashboard' %}">Home</a></p>
+        </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'dashboard/partials/base.html' %}
+
+{% block title %}Leave Detail{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row py-2 align-items-center">
+        <div class="col-6">
+            <h5>Leave Detail</h5>
+
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-dark btn-sm"><a href="{% url 'leave-list' %}"
+                    class="text-white text-decoration-none">Back</a></button>
+        </div>
+
+    </div>
+    <div class="row py-2">
+        <div class="col">
+
+            <div class="card mb-2 shadow border-0">
+                <div class="card-body">
+                    <p><strong>Employee Name:</strong> {{ leave_application.employee.user.username }}</p>
+                    <p><strong>Leave Type:</strong> {{ leave_application.leave_type }}</p>
+                    <p><strong>Applied On:</strong> {{ leave_application.applied_on }}</p>
+                    <p><strong>Start Date:</strong> {{ leave_application.start_date }}</p>
+                    <p><strong>End Date:</strong> {{ leave_application.end_date }}</p>
+                    <p><strong>Reason:</strong> {{ leave_application.reason }}</p>
+                    <p><strong>Status:</strong> {{ leave_application.status }}</p>
+                    {% if user.is_superuser %}
+                    <button class="btn btn-sm btn-success"><a href="{% url 'approve-leave' leave_application.id %}" class="text-white text-decoration-none">Approve</a></button>
+                    <button class="btn btn-sm btn-danger"><a href="{% url 'reject-leave' leave_application.id %}" class="text-white text-decoration-none">Reject</a></button>
+                    {% endif %}
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
