@@ -1,0 +1,36 @@
+{% extends 'dashboard/partials/base.html' %}
+
+{% block title %}ASMR - Delete Task{% endblock title %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row py-2">
+        <div class="col-6">
+            <h5>Delete Task</h5>
+
+        </div>
+        <div class="col-6 text-end">
+            <button class="btn btn-sm btn-dark"><a href="{% url 'task-view' project_id=task.project.id %}"
+                    class="text-white text-decoration-none">Back</a></button>
+        </div>
+
+    </div>
+    <div class="row py-2">
+        <div class="col">
+
+            <div class="card mb-2 shadow border-0">
+
+                <div class="card-body">
+                    <h5 class="card-title">Confirm Delete</h5>
+                    <p class="card-text">Are you sure you want to delete task: <strong>{{ task.name }}</strong>?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -2,6 +2,17 @@
     position: relative;
 }
 
+.dropdown-menu .dropdown-submenu {
+    display: none;
+    position: relative;
+    left: 10%;
+    top: 20%;
+}
+
+.dropdown-menu > li:hover > .dropdown-submenu {
+    display: block;
+}
+
 /* ChatBot */
 #message-content {
     max-height: calc(100vh - 182px);

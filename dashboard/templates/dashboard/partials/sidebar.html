@@ -5,11 +5,35 @@
 
 <ul class="nav flex-column py-2">
     <li class="nav-item">
-        <a class="nav-link {% if request.path == '/' %}active text-white{% else %}text-secondary{% endif %}" {% if request.path == '/' %}aria-current="page"{% endif %} href="{% url 'dashboard' %}"><i class="bi bi-speedometer"></i> Dashboard</a>
+        <a class="nav-link {% if request.path == '/' %}active text-white{% else %}text-secondary{% endif %}" 
+        {% if request.path == '/' %}aria-current="page" {% endif %} href="{% url 'dashboard' %}"><i
+                class="bi bi-speedometer"></i> Dashboard</a>
     </li>
     {% if user.employee or user.is_superuser %}
     <li class="nav-item">
-        <a class="nav-link {% if '/leaves/' in request.path %}active text-white{% else %}text-secondary{% endif %}" {% if '/leaves/' in request.path %}aria-current="page"{% endif %} href="{% url 'leave-list' %}"><i class="bi bi-tree"></i> Leave Tracker</a>
+        <a class="nav-link {% if '/leaves/' in request.path %}active text-white{% else %}text-secondary{% endif %}" 
+        {% if '/leaves/' in request.path %} aria-current="page" {% endif %} href="{% url 'leave-list' %}"><i
+                class="bi bi-tree"></i> Leave Tracker</a>
     </li>
     {% endif %}
+    <li class="nav-item dropdown" data-bs-theme="dark">
+        <a class="nav-link dropdown-toggle {% if '/projects/' in request.path %}active text-white{% else %}text-secondary{% endif %}"
+            {% if '/projects/' in request.path %}aria-current="page" {% endif %} href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-kanban"></i> Projects
+        </a>
+        <ul class="dropdown-menu border-0">
+            {% for brand in brands %}
+            <li>
+                <a class="dropdown-item dropdown-toggle" href="#">{{ brand.name }}</a>
+                <ul class="dropdown-menu dropdown-submenu border-0">
+                    {% for project in brand.projects.all %}
+                    <li><a class="dropdown-item" href="{% url 'task-view' project.id %}">{{ project.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+
+            {% endfor %}
+        </ul>
+    </li>
 </ul>
